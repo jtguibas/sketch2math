@@ -1,7 +1,7 @@
 # sketch2math
-[https://jtguibas.github.io/sketch2math/](https://jtguibas.github.io/sketch2math/)
+[https://jtguibas.github.io/sketch2math](https://jtguibas.github.io/sketch2math/)
 
-**convert any sketch to a single mathematical equation**
+**convert any sketch into a single mathematical equation**
 
 ### Screenshot
 ![screenshot](https://i.imgur.com/F1bohSX.jpg)
