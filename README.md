@@ -1,5 +1,5 @@
 # sketch2math
-[https://jtguibas.github.io/sketch2math/index.html](https://jtguibas.github.io/sketch2math/)
+[https://jtguibas.github.io/sketch2math/](https://jtguibas.github.io/sketch2math/)
 
 **convert any sketch to a single mathematical equation using a hacky trick  with circles**
 
