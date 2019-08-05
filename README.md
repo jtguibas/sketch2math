@@ -1,9 +1,9 @@
 # sketch2math
 [https://jtguibas.github.io/sketch2math/index.html](https://jtguibas.github.io/sketch2math/index.html)
 
-convert any sketch to a single mathematical equation using a hacky trick  with circles
+**convert any sketch to a single mathematical equation using a hacky trick  with circles**
 
-Screenshot:
+### Screenshot
 ![screenshot](https://i.imgur.com/ijyj0rE.png)
 
 ### How It Works
@@ -17,6 +17,11 @@ What you'll have a is a classic case of concentric circles, graphed in one singl
 ![concentric](https://i.imgur.com/uWlpAJS.png)
 
 This is the essence of the trick here, except it can be used for any number of circles. All I did was make the circles extremely elliptic to disguise them as lines. From there, I can just treat them as line segments. Multiply all your equations, and you'll have your equation!!
+
+
+### Note
+
+In the actual demo, the equations are graphed seperately because Desmos cannot handle such big equations.
 
 
 
