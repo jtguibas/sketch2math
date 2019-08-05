@@ -6,6 +6,8 @@
 ### Screenshot
 ![screenshot](https://i.imgur.com/F1bohSX.jpg)
 
+unfortunately, the equation isn't factored out (it would look a lot cooler, but it would also be a lot longer)
+
 ### How It Works
 
 Being the bored student I am in math class, I was staring at a few equations until I realized this neat trick.
