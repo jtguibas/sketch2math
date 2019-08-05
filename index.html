@@ -42,10 +42,10 @@
             var finalEquation = ""
             for (var j = 0; j < eqSet.length; j++){
                 if (j == eqSet.length - 1){
-                    finalEquation += "\\left(" + eqSet[j] + "\\right)";
+                    finalEquation += "\\left(" + eqSet[j] + "-1\\right)";
                 }
                 else{
-                    finalEquation += "\\left(" + eqSet[j] + "\\right)" + "*";
+                    finalEquation += "\\left(" + eqSet[j] + "-1\\right)" + "*";
                 }
             }
             finalEquation += "=1"
