@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>sketch2math</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+        integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="js/paper-full.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
+    <script src="https://www.desmos.com/api/v1.3/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+        integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous">
+    </script>
+    <script type="text/paperscript" canvas="myCanvas">
+
+        var currentPath;
+        var paths = [];
+        var segments = [];
+        var eqSet = [];
+
+        tool.minDistance = 20;
+
+        function onMouseDown(event) {
+            currentPath = new Path();
+            currentPath.strokeColor = 'white';
+        }
+        
+        function onMouseUp(event) {
+            paths.push(currentPath);
+            segments = segments.concat(getLineSegment(currentPath));
+            eqSet = [];
+            for (var i = 0; i < segments.length; i++){
+                eq = segmentToEquation(segments[i])
+                eqSet.push(eq.substring(0, eq.length - 2));
+                calculator.setExpression({id:'graph' + i.toString(), latex:eq});
+            }
+
+            var finalEquation = ""
+            for (var j = 0; j < eqSet.length; j++){
+                if (j == eqSet.length - 1){
+                    finalEquation += "\\left(" + eqSet[j] + "\\right)";
+                }
+                else{
+                    finalEquation += "\\left(" + eqSet[j] + "\\right)" + "*";
+                }
+            }
+            finalEquation += "=1"
+            console.log(finalEquation);
+            katex.render(finalEquation  , document.getElementById("katex"), {
+                throwOnError: false
+            });
+        }
+
+        
+
+        function onMouseDrag(event) {
+            currentPath.add(event.point);
+        }
+
+        function getLineSegment(path) {
+            var segments = path._segments;
+            var lineSegments = [];
+
+            for (var i = 1; i < segments.length; i++) {
+                lineSegments.push({
+                    "x1": (segments[i-1]._point._x / 100) - 5,
+                    "y1": (-segments[i-1]._point._y / 100) + 5,
+                    "x2": (segments[i]._point._x / 100) - 5,
+                    "y2": (-segments[i]._point._y / 100) + 5
+                })
+            }
+
+            return lineSegments;
+        }
+
+        function segmentToEquation(segment) {
+            var midX = ((segment.x1 + segment.x2) / 2).toFixed(3);
+            var midY = ((segment.y1 + segment.y2) / 2).toFixed(3);
+            var distance = (getDistance(segment)).toFixed(3);
+            var _distance = (distance / 2).toFixed(3);
+            var cos = ((segment.x1 - segment.x2) / distance).toFixed(3);
+            var sin = ((segment.y1 - segment.y2) / distance).toFixed(3);
+
+            if (cos < 0.001 && cos > 0) {cos = 0.0001;};
+            if (sin < 0.001 && sin > 0) {cos = 0.0001;};
+            if (cos > -0.001 && cos < 0) {cos = -0.0001;};
+            if (sin > -0.001 && sin < 0) {cos = -0.0001;};
+
+            var p1 = "\\frac{\\left(\\left(x-" + midX.toString();
+            var p2 = "\\right)(" + cos.toString();
+            var p3 = ")+\\left(y-" + midY.toString();
+            var p4 = "\\right)(" + sin.toString();
+            var p5 = ")\\right)^2}{" + _distance.toString();
+            var p6 = "^2}+\\frac{\\left(\\left(x-" + midX.toString();
+            var p7 = "\\right)(" + sin.toString();
+            var p8 = ")-\\left(y-" + midY.toString();
+            var p9 = "\\right)(" + cos.toString();
+            var p10 = ")\\right)^2}{0.001^2}=1"
+
+            var eq = p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9 + p10;
+            return eq;
+        }
+
+        function getDistance(segment){
+            return Math.sqrt((segment.x2 - segment.x1) * (segment.x2 - segment.x1)  + (segment.y2 - segment.y1) * (segment.y2 - segment.y1));
+        }
+
+        var elt = document.getElementById('calculator');
+        var calculator = Desmos.GraphingCalculator(elt, {expressions: false});
+    </script>
+
+</head>
+
+<body>
+    <div id="title">
+        <h5>sketch2math - convert any sketch to a single mathematical equation - <a href="github.com/jtguibas">github</a></h5>
+        <h6>draw on the canvas below to get started</h6>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h6>Canvas</h6>
+                <canvas id="myCanvas" resize></canvas>
+            </div>
+            <div class="col-6">
+                <h6>Desmos Graph</h6>
+                <div id="calculator" style="width: 600px; height: 600px;"></div>
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-secondary" onclick="showEquation()">show/hide equation </button>
+        <br><br>
+        <h6 id="katex" style='display: block;'></h6>
+    </div>
+
+</body>
+
+<script>
+    function showEquation() {
+        var el = document.getElementById("katex");
+        if (el.style.display == "none") {
+            el.style.display = "block";
+        } else {
+            el.style.display = "none";
+        }
+    }
+</script>
+
+</html>
