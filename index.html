@@ -8,6 +8,7 @@
         integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
     <script type="text/javascript" src="js/paper-full.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
@@ -109,17 +110,20 @@
             return Math.sqrt((segment.x2 - segment.x1) * (segment.x2 - segment.x1)  + (segment.y2 - segment.y1) * (segment.y2 - segment.y1));
         }
 
+
         var elt = document.getElementById('calculator');
         var calculator = Desmos.GraphingCalculator(elt, {expressions: false});
     </script>
 
 </head>
 
-<body>
+<body style="background-color: #f7f6f1;">
     <div id="title">
-        <h5>sketch2math - convert any sketch to a single mathematical equation - <a href="github.com/jtguibas">github</a></h5>
-        <h6>draw on the canvas below to get started</h6>
+        <p>sketch2math - convert any sketch to a single mathematical equation
+        <br>
+        draw on the canvas below to get started - <a href="github.com/jtguibas">github</a></p>
     </div>
+
     <div class="container">
         <div class="row">
             <div class="col-6">
@@ -137,6 +141,12 @@
         <h6 id="katex" style='display: block;'></h6>
     </div>
 
+    <footer class="footer">
+            <div class="container">
+              <span class="text-muted">The full LaTeX equation is printed in the console.</span>
+            </div>
+    </footer>
+
 </body>
 
 <script>
@@ -148,6 +158,8 @@
             el.style.display = "none";
         }
     }
+
+    
 </script>
 
 </html>
