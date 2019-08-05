@@ -21,7 +21,7 @@ What you'll have is a classic case of concentric circles, graphed in one single 
 This is the essence of the trick here, except it can be used for any number of circles. All I did was make the circles into extremely slim elliptic to disguise them as lines. From there, I can just treat them as line segments. Multiply all your equations, and you'll have your equation!!
 
 
-### Note
+### Extras
 
 In the actual demo, the equations are graphed seperately because Desmos cannot handle such big equations. If you can find a powerful grapher than can take LaTeX as an input, please let me know.
 
