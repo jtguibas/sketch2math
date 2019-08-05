@@ -1,12 +1,12 @@
 # sketch2math
 [https://jtguibas.github.io/sketch2math](https://jtguibas.github.io/sketch2math/)
 
-**convert any sketch into a single mathematical equation**
+**convert any sketch into a single mathematical equation** (using circles)
 
 ### Screenshot
 ![screenshot](https://i.imgur.com/F1bohSX.jpg)
 
-unfortunately, the equation isn't factored out (it would look a lot cooler, but it would also be a lot longer)
+unfortunately, the equation isn't multiplied out (it would look a lot cooler but it would also be a lot longer)
 
 ### How It Works
 
@@ -18,7 +18,7 @@ What you'll have is a classic case of concentric circles, graphed in one single 
 
 ![concentric](https://i.imgur.com/uWlpAJS.png)
 
-This is the essence of the trick here, except it can be used for any number of circles. All I did was make the circles into extremely slim elliptic to disguise them as lines. From there, I can just treat them as line segments. Multiply all your equations, and you'll have your equation!!
+This is the essence of the trick here, except it can be used for any number of circles. All I did was make the circles into extremely slim ellipses to disguise them as lines. From there, I can just treat them as line segments. Multiply all your equations, and you'll have your equation!!
 
 
 ### Extras
