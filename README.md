@@ -1,7 +1,7 @@
 # sketch2math
 [https://jtguibas.github.io/sketch2math](https://jtguibas.github.io/sketch2math/)
 
-**convert any sketch into a single mathematical equation** (using circles)
+**convert any sketch into a single mathematical equation** (using ellipses)
 
 ### Screenshot
 ![screenshot](https://i.imgur.com/F1bohSX.jpg)
